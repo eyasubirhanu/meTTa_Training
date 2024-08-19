@@ -39,7 +39,7 @@ def get_transcript(node):
 #2 point
 def get_protein(node):
     protein = metta.run(f'''
-        ! (match &space (, (transcribed_to ({node[0]}) $B) (translates_to $B $C) )  (translates_to ({node[0]}) $C))
+        ! (match &space (, (transcribed_to ({node[0]}) $B) (translates_to $B $C) )  (translates_to $B $C))
     ''') #TODO
     return protein
 
@@ -56,4 +56,3 @@ print(result) #[[(, (transcribed_to (gene ENSG00000175793) (transcript ENST00000
 #6 point
 parsed_result = metta_seralizer(result)
 print(parsed_result) # [{'edge': 'transcribed_to', 'source': 'gene ENSG00000175793', 'target': 'transcript ENST00000339276'}]
-
