@@ -60,7 +60,7 @@ def metta_seralizer(metta_result):
 
     return result
 
-result= (get_transcript(['gene ENSG00000175793'])) # change the gene id to "ENSG00000166913"
+result= (get_transcript(['gene ENSG00000166913'])) # change the gene id to "ENSG00000166913"
 print(result) #[[(, (transcribed_to (gene ENSG00000175793) (transcript ENST00000339276)))]]
 
 #6 point
