@@ -30,16 +30,34 @@ except Exception as e:
 
 # 2 point
 def get_transcript(node):
-    transcript = metta.run() #TODO
+    gene_id = node[0]
+    query = f'''!(match &space (transcribed_to({gene_id})(transcript $t))
+                               (transcribed_to {gene_id} (transcript $t))'''
+    transcript = metta.run(query) #TODO
     return transcript     #[[(, (transcribed_to (gene ENSG00000175793) (transcript ENST00000339276)))]]
 
 #2 point
 def get_protein(node):
-    protein = metta.run() #TODO
+    gene_id = node[0]
+    query = f'''!(match &space (transcribed_to({gene_id})(protein $p))
+                               (transcribed_to {gene_id} (protein $p))'''
+    protein = metta.run(Query) #TODO
     return protein
 
 def metta_seralizer(metta_result):
     #TODO
+    result = []
+      for item in metta_result:
+        for sub_item in item:
+            edge = sub_item.get_children()[0]
+            source = sub_item.get_children()[1].get_children()
+            target = sub_item.get_children()[2].get_children()
+        result.append({
+            "edge": edge,
+            "source": source,
+            "target": target
+        })
+
     return result
 
 result= (get_transcript(['gene ENSG00000175793'])) # change the gene id to "ENSG00000166913"
